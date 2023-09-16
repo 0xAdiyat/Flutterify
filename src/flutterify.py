@@ -2,6 +2,83 @@ import os
 import subprocess
 
 
+class CodeSnippets:
+    def __init__(self):
+        self.size_config_code = """
+import 'package:flutter/widgets.dart';
+
+class SizeConfig {
+  static late Size _mediaQueryData;
+  static late double screenWidth;
+  static late double screenHeight;
+  static late double blockSizeHorizontal;
+  static late double blockSizeVertical;
+
+  static late double textMultiplier;
+  static late double imageSizeMultiplier;
+  static late double heightMultiplier;
+
+  static double get screenWidthInfinity =>
+      double.infinity / blockSizeHorizontal;
+
+  static double get screenHeightInfinity => double.infinity / blockSizeVertical;
+
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.sizeOf(context);
+    screenWidth = _mediaQueryData.width;
+    screenHeight = _mediaQueryData.height;
+    blockSizeHorizontal = screenWidth / 100;
+    blockSizeVertical = screenHeight / 100;
+
+    textMultiplier = blockSizeVertical;
+    imageSizeMultiplier = blockSizeHorizontal;
+    heightMultiplier = blockSizeVertical;
+  }
+}
+        """
+
+        self.app_icons_code = """
+class AppIcons {
+  static const placeholder = 'assets/icons/placeholder.svg';
+}
+        """
+        self.app_images_code = """
+class AppImages {
+  static const placeholder = 'assets/images/placeholder.png';
+}
+
+        """
+        self.route_paths = """
+class RoutePaths {
+  static const splashPage = '/';
+  static const homePage = '/homePage';
+}
+        """
+        self.app_themes = """
+import 'package:flutter/material.dart';
+
+class AppThemes {
+  AppThemes._();
+
+  static ThemeData lightTheme(BuildContext context) => ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.black,
+      );
+
+  static ThemeData darkTheme(BuildContext context) =>
+      ThemeData.dark().copyWith();
+}
+        """
+        self.config_code = """
+export 'res/assets/app_icons.dart';
+export 'res/assets/app_images.dart';
+export 'res/routes/routes.dart';
+export 'res/strings/app_strings.dart';
+export 'themes/app_colors.dart';
+export 'themes/app_themes.dart';
+        """
+
+
 def create_directories(base_directory, directories):
     """
     Create directories and subdirectories.
@@ -56,7 +133,14 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-if __name__ == '__main__':
+def insert_code_into_file(file_path, code_to_insert):
+    with open(file_path, 'a') as file:
+        file.write(code_to_insert)
+
+
+def main():
+    code_snippets = CodeSnippets()
+
     while True:
         project_name = input("Enter Flutter project name: ")
         package_name = input("Enter package name (or press Enter to use com.anon007 as default): ").strip()
@@ -83,7 +167,7 @@ if __name__ == '__main__':
     # Architecture selection
     while True:
         architecture_choice = input(
-            "Choose an architecture (0xAdiyat's Special (1), MVVC (2), MVC (3)): ").strip()
+            "Choose an architecture (Flutterify Special (1), MVVC (2), MVC (3)): ").strip()
         if architecture_choice == '1' or architecture_choice == '':
 
             # Create the Flutter project with the specified package name
@@ -144,6 +228,19 @@ if __name__ == '__main__':
             create_dart_file(os.path.join(project_directory, 'lib', 'data', 'response'), 'api_response.dart')
             create_dart_file(os.path.join(project_directory, 'lib', 'data', 'response'), 'status.dart')
 
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'constants', 'size_config.dart'),
+                                  code_snippets.size_config_code)
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'config.dart'),
+                                  code_snippets.config_code)
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets', 'app_icons.dart'),
+                                  code_snippets.app_icons_code)
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets', 'app_images.dart'),
+                                  code_snippets.app_images_code)
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes', 'route_paths.dart'),
+                                  code_snippets.route_paths)
+            insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'themes', 'app_themes.dart'),
+                                  code_snippets.app_themes)
+
             break
         elif architecture_choice == '2':
             print("MVVC architecture is under construction. Please wait for an update.")
@@ -152,8 +249,8 @@ if __name__ == '__main__':
             print("MVC architecture is under construction. Please wait for an update.")
             break
         else:
-            print("Invalid choice. Please enter '1' for 0xAdiyat's Special, '2' for MVVC, '3' for MVC, or press Enter "
-                  "for 0xAdiyat's Special (default).")
+            print("Invalid choice. Please enter '1' for Flutterify Special, '2' for MVVC, '3' for MVC, or press Enter "
+                  "for Flutterify Special (default).")
 
     # Change into the project directory
     os.chdir(os.path.join(project_directory, 'lib'))
@@ -182,4 +279,6 @@ if __name__ == '__main__':
             print("Invalid choice. Please enter 'A' for Android Studio, 'V' for Visual Studio Code, 'D' to open the "
                   "project directory, or 'C' to cancel.")
 
-    print(f'Flutter project "{formatted_project_name}" created.')
+
+if __name__ == '__main__':
+    main()

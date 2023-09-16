@@ -53,7 +53,6 @@ def open_in_vscode(project_directory):
 
 def clear_screen():
     os.environ['TERM'] = 'xterm'
-
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -81,46 +80,80 @@ if __name__ == '__main__':
     # Change into the StudioProjects directory
     os.chdir(studio_projects_directory)
 
-    # Create the Flutter project with the specified package name
-    os.system(f'flutter create --org {package_name} {formatted_project_name}')
+    # Architecture selection
+    while True:
+        architecture_choice = input(
+            "Choose an architecture (0xAdiyat's Special (1), MVVC (2), MVC (3)): ").strip()
+        if architecture_choice == '1' or architecture_choice == '':
 
-    # Specify the directories to create within the project
-    directories_to_create = [
-        os.path.join(project_directory, "assets"),
-        os.path.join(project_directory, "assets", "icons"),
-        os.path.join(project_directory, "assets", "images"),
-        os.path.join(project_directory, "assets", "fonts"),
-        os.path.join(project_directory, 'lib', 'widgets'),
-        os.path.join(project_directory, 'lib', 'config'),
-        os.path.join(project_directory, 'lib', 'view'),
-        os.path.join(project_directory, 'lib', 'viewmodels'),
-        os.path.join(project_directory, 'lib', 'services'),
-        os.path.join(project_directory, 'lib', 'config', 'constants'),
-        os.path.join(project_directory, 'lib', 'config', 'res', 'assets'),
-        os.path.join(project_directory, 'lib', 'config', 'res', 'routes'),
-        os.path.join(project_directory, 'lib', 'config', 'res', 'strings'),
-        os.path.join(project_directory, 'lib', 'config', 'themes')
-    ]
+            # Create the Flutter project with the specified package name
+            os.system(f'flutter create --org {package_name} {formatted_project_name}')
 
-    create_directories(project_directory, directories_to_create)
+            # Specify the directories to create within the project
+            directories_to_create = [
+                os.path.join(project_directory, "assets"),
+                os.path.join(project_directory, "assets", "icons"),
+                os.path.join(project_directory, "assets", "images"),
+                os.path.join(project_directory, "assets", "fonts"),
+                os.path.join(project_directory, 'lib', 'widgets'),
+                os.path.join(project_directory, 'lib', 'config'),
+                os.path.join(project_directory, 'lib', 'views'),
+                os.path.join(project_directory, 'lib', 'view_models'),
+                os.path.join(project_directory, 'lib', 'models'),
+                os.path.join(project_directory, 'lib', 'repository'),
+                os.path.join(project_directory, 'lib', 'data', 'network'),
+                os.path.join(project_directory, 'lib', 'data', 'response'),
+                os.path.join(project_directory, 'lib', 'config', 'constants'),
+                os.path.join(project_directory, 'lib', 'config', 'res', 'assets'),
+                os.path.join(project_directory, 'lib', 'config', 'res', 'routes'),
+                os.path.join(project_directory, 'lib', 'config', 'res', 'strings'),
+                os.path.join(project_directory, 'lib', 'config', 'themes')
+            ]
+            create_directories(project_directory, directories_to_create)
 
-    # Create Dart files in specific directories
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'constants'), 'app_const.dart')
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'constants'), 'size_config.dart')
+            # Create Dart files in specific directories
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'constants'), 'app_const.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'constants'), 'size_config.dart')
 
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets'), 'app_icons.dart')
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets'), 'app_images.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets'), 'app_icons.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'assets'), 'app_images.dart')
 
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'app_routes.dart')
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'route_paths.dart')
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'routes.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'app_routes.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'route_paths.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'routes'), 'routes.dart')
 
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'strings'), 'app_strings.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'res', 'strings'), 'app_strings.dart')
 
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'themes'), 'app_colors.dart')
-    create_dart_file(os.path.join(project_directory, 'lib', 'config', 'themes'), 'app_themes.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'themes'), 'app_colors.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config', 'themes'), 'app_themes.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'config'), 'config.dart')
 
-    create_dart_file(os.path.join(project_directory, 'lib'), 'config.dart')
+            create_dart_file(os.path.join(project_directory, 'lib'), 'app.dart')
+
+            create_dart_file(os.path.join(project_directory, 'lib', 'views'), 'views.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'view_models'), 'view_models.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'models'), 'models.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'widgets'), 'widgets.dart')
+
+            create_dart_file(os.path.join(project_directory, 'lib', 'views'), 'home_view.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'view_models'), 'home_viewmodel.dart')
+
+            create_dart_file(os.path.join(project_directory, 'lib', 'data'), 'app_exceptions.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'data', 'network'), 'base_api_services.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'data', 'network'), 'network_api_services.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'data', 'response'), 'api_response.dart')
+            create_dart_file(os.path.join(project_directory, 'lib', 'data', 'response'), 'status.dart')
+
+            break
+        elif architecture_choice == '2':
+            print("MVVC architecture is under construction. Please wait for an update.")
+            break
+        elif architecture_choice == '3':
+            print("MVC architecture is under construction. Please wait for an update.")
+            break
+        else:
+            print("Invalid choice. Please enter '1' for 0xAdiyat's Special, '2' for MVVC, '3' for MVC, or press Enter "
+                  "for 0xAdiyat's Special (default).")
 
     # Change into the project directory
     os.chdir(os.path.join(project_directory, 'lib'))

@@ -61,10 +61,10 @@ Choose `my_flutter_app` with your desired project name. This command will set up
 alias fc="flutterify"
 
 # To open the project in Android Studio, use:
-fc --android-studio
+fc --android-studio `coming soon`
 
 # To open the project in Visual Studio Code, use:
-fc --vscode
+fc --vscode `coming soon`
 
 
 ## Configuration

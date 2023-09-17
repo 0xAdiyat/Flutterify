@@ -5,6 +5,7 @@ Effortlessly Create and Deploy Flutter Magic
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Preview](#preview)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -17,6 +18,13 @@ Effortlessly Create and Deploy Flutter Magic
 ## Introduction
 
 Welcome to Flutterify, a powerful tool that simplifies the process of creating and deploying Flutter projects. Whether you're a seasoned developer or just getting started with Flutter, Flutterify streamlines the setup and configuration, allowing you to focus on building amazing Flutter apps.
+
+## Preview
+
+
+https://github.com/0xAdiyat/Flutterify/assets/67780459/c25ac6cc-981b-43af-88da-54a76025617d
+
+
 
 ## Getting Started
 
@@ -52,8 +60,9 @@ Flutterify makes it easy to create and deploy Flutter projects. Here are some co
 To create a new Flutter project using Flutterify, use the following command:
 
 ```shell
-flutterify
+python3 flutterify.py
 ```
+you can also create your `own allies` incase to avoid writting the whole command. For me it was `fc` 
 
 Choose `my_flutter_app` with your desired project name. This command will set up a new Flutter project with a recommended project structure.
 

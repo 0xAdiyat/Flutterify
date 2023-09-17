@@ -97,8 +97,11 @@ def create_directories(base_directory, directories):
         None
     """
     for directory in directories:
-        directory_path = os.path.join(base_directory, directory)
-        os.makedirs(directory_path, exist_ok=True)
+        try:
+            directory_path = os.path.join(base_directory, directory)
+            os.makedirs(directory_path, exist_ok=True)
+        except OSError as e:
+            print(f"Error creating directory {directory_path}: {str(e)}")
 
 
 def create_dart_file(directory, file_name, content=""):
@@ -114,8 +117,11 @@ def create_dart_file(directory, file_name, content=""):
         None
     """
     file_path = os.path.join(directory, file_name)
-    with open(file_path, "w") as file:
-        file.write(content)
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+    except OSError as e:
+        print(f"Error creating Dart file {file_path}: {str(e)}")
 
 
 def open_in_editor(editor, project_directory):
@@ -131,8 +137,11 @@ def clear_screen():
 
 
 def insert_code_into_file(file_path, code_to_insert):
-    with open(file_path, 'a') as file:
-        file.write(code_to_insert)
+    try:
+        with open(file_path, 'a') as file:
+            file.write(code_to_insert)
+    except OSError as e:
+        print(f"Error inserting code into file {file_path}: {str(e)}")
 
 
 architecture_choices = [
@@ -165,8 +174,8 @@ def main():
     code_snippets = CodeSnippets()
 
     while True:
-        project_name = input("Enter Flutter project name: ")
         print("\n")
+        project_name = input("Enter Flutter project name: ")
         package_name = input("Enter package name (or press Enter to use com.anon007 as default): ").strip()
         print("\n")
 
@@ -185,7 +194,10 @@ def main():
             break
 
     if not os.path.exists(studio_projects_directory):
-        os.mkdir(studio_projects_directory)
+        try:
+            os.mkdir(studio_projects_directory)
+        except OSError as e:
+            print(f"Error creating directory {studio_projects_directory}: {str(e)}")
 
     # Change into the StudioProjects directory
     os.chdir(studio_projects_directory)
@@ -195,7 +207,10 @@ def main():
 
     if architecture_choice == '1' or architecture_choice == '':
         # Create the Flutter project with the specified package name
-        os.system(f'flutter create --org {package_name} {formatted_project_name}')
+        try:
+            os.system(f'flutter create --org {package_name} {formatted_project_name}')
+        except OSError as e:
+            print(f"Error creating Flutter project: {str(e)}")
 
         # Specify the directories to create within the project
         directories_to_create = [
@@ -265,7 +280,6 @@ def main():
         insert_code_into_file(os.path.join(project_directory, 'lib', 'config', 'themes', 'app_themes.dart'),
                               code_snippets.app_themes)
 
-
     elif architecture_choice == '2':
         print("MVVC architecture is under construction. Please wait for an update.")
         sys.exit(0)
@@ -285,12 +299,21 @@ def main():
     opening_option = inquirer.prompt(opening_options)['open_option']
 
     if opening_option == 'studio':
-        open_in_editor("studio", project_directory)
+        try:
+            open_in_editor("studio", project_directory)
+        except Exception as e:
+            print(f"Error opening project in Android Studio: {str(e)}")
 
     elif opening_option == 'code':
-        open_in_editor("code", project_directory)
+        try:
+            open_in_editor("code", project_directory)
+        except Exception as e:
+            print(f"Error opening project in Visual Studio Code: {str(e)}")
     elif opening_option == 'directory':
-        subprocess.run(["open", project_directory])
+        try:
+            subprocess.run(["open", project_directory])
+        except Exception as e:
+            print(f"Error opening project directory: {str(e)}")
     elif opening_option == 'cancel':
         print("Process canceled. The project was created but not opened.")
         sys.exit(0)

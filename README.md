@@ -60,8 +60,9 @@ Flutterify makes it easy to create and deploy Flutter projects. Here are some co
 To create a new Flutter project using Flutterify, use the following command:
 
 ```shell
-flutterify
+python3 flutterify.py
 ```
+you can also create your `own allies` incase to avoid writting the whole command,for me it was `fc` 
 
 Choose `my_flutter_app` with your desired project name. This command will set up a new Flutter project with a recommended project structure.
 

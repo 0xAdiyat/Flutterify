@@ -2,18 +2,21 @@
 
 Effortlessly Create and Deploy Flutter Magic
 
-## Table of Contents
+<details>
+  <summary><h2>Table of Contents</h1></summary>
 
-- [Introduction](#introduction)
-- [Preview](#preview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+  - [Introduction](#introduction)
+  - [Preview](#preview)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
+</details>
+
 
 ## Introduction
 
@@ -42,7 +45,7 @@ Before using Flutterify, ensure you have the following prerequisites installed o
 1. Clone the Flutterify repository:
 
    ```shell
-   git clone https://github.com/0xAdiyatFflutterify.git
+   git clone https://github.com/0xAdiyat/flutterify.git
    ```
 
 2. Navigate to the Flutterify directory:
@@ -62,7 +65,7 @@ To create a new Flutter project using Flutterify, use the following command:
 ```shell
 python3 flutterify.py
 ```
-you can also create your `own allies` incase to avoid writting the whole command. For me it was `fc` 
+you can also create your `own allies` in case to avoid writing the whole command. For me, it was `fc` 
 
 Choose `my_flutter_app` with your desired project name. This command will set up a new Flutter project with a recommended project structure.
 

@@ -1,6 +1,6 @@
 # Flutterify
 
-Effortlessly Create and Deploy Flutter Magic
+Effortlessly Create and Deploy Flutter Magic. I will improve it to the next level. To support and get notified make sure to star the repo to get future updates :D
 
 <details>
   <summary><h2>Table of Contents</h1></summary>
